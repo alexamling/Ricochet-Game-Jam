@@ -5,12 +5,12 @@ using UnityEngine.AI;
 //this is a sample movement script
 public class SampleMovement : MonoBehaviour
 {
-    public Transform goal;
-
+    private Transform goal;
     private NavMeshAgent agent;
 
     void Start()
     {
+        goal = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 

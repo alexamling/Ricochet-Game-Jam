@@ -35,4 +35,13 @@ public class Movement : MonoBehaviour {
         velocity *= currentSpeed;
         rb.velocity = velocity;
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Collision");
+        if (other.collider.CompareTag("Enemy"))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
+        }
+    }
 }
