@@ -11,14 +11,14 @@ public class Movement : MonoBehaviour {
     private float runSpeed;
 
     //Other variables
-    private Vector2 velocity;
+    private Vector3 velocity;
     private float currentSpeed;
-    private Vector3 newPosition;
+    private Rigidbody rb;
     
     //Default Methods
 	void Start () {
-		
-	}
+        rb = this.GetComponent<Rigidbody>();
+    }
 	
 	void Update () {
         currentSpeed = walkSpeed;
@@ -28,10 +28,11 @@ public class Movement : MonoBehaviour {
             currentSpeed = runSpeed;
         }
 
-        velocity.x = Input.GetAxisRaw("Horizontal") * currentSpeed;
-        velocity.y = Input.GetAxisRaw("Vertical") * currentSpeed;
+        velocity.x = Input.GetAxisRaw("Horizontal"); ;
+        velocity.z = Input.GetAxisRaw("Vertical");
 
-
-        transform.position = new Vector3 (velocity.x + transform.position.x, transform.position.y, velocity.y + transform.position.z);
+        velocity.Normalize();
+        velocity *= currentSpeed;
+        rb.velocity = velocity;
     }
 }
