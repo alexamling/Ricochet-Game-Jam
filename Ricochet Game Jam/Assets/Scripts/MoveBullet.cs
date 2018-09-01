@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoveBullet : MonoBehaviour {
 
+
+
     //Variables
     private float speed;
     private Vector2 trajectory;
@@ -18,8 +20,16 @@ public class MoveBullet : MonoBehaviour {
         }
     }
 
+    public Vector2 Trajectory
+    {
+        get
+        {
+            return trajectory;
+        }
+    }
+
     //Default Methods
-	void Start () {
+    void Start () {
 		
 	}
 	

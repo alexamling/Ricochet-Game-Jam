@@ -22,19 +22,22 @@ public class Shoot : MonoBehaviour {
 	void Start () {
         lastShot = gunTimer * -1;
 	}
-	
-	void Update () {
+
+    void Update()
+    {
         if (Input.GetAxisRaw("Fire1") > 0 && Time.fixedTime > lastShot + gunTimer)
         {
-            bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            shot = bullet.GetComponent<MoveBullet>();
-            
+
             Vector2 mousePos = Input.mousePosition;
             mousePos.x -= Screen.width / 2;
             mousePos.y -= Screen.height / 2;
 
+            Vector3 position = new Vector3(transform.position.x + mousePos.normalized.x, transform.position.y, transform.position.z + mousePos.normalized.y);
+            bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+            shot = bullet.GetComponent<MoveBullet>();
+
+            lastShot = Time.time;
             shot.NewMove(bulletSpeed, mousePos);
-            lastShot = Time.fixedTime;
         }
-	}
+    }
 }
